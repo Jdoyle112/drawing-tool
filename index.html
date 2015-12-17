@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+	<div class="heading">
+		<h1>Canvas Drawing Tool!</h1>
+		<h4>Use the box below to draw</h4>
+		
+	</div>
+	<div class="draw">
+	<input id="input" value="Type a color">
+	<button id="reset">Reset</button>
+	<canvas id="mycanvas" width="600" height="400"></canvas>
+	</div>
+	<script type="text/javascript">
+
+	(function() {
+	var lineColor;
+	var canvas = document.getElementById("mycanvas");
+	var ctx = canvas.getContext("2d");
+
+	var mouse = {x: 0, y: 0};
+
+	$('#input').change(function(){
+		 ctx.strokeStyle = lineColor;
+		 ctx.stroke();
+	});
+	 
+	/* Mouse Capturing Work */
+	canvas.addEventListener('mousemove', function(e) {
+		mouse.x = e.pageX - this.offsetLeft;
+		mouse.y = e.pageY - this.offsetTop;
+	}, false);
+	
+	/* Drawing on Paint App */
+	ctx.lineWidth = 5;
+
+	ctx.lineCap = 'round';
+
+	 
+	canvas.addEventListener('mousedown', function(e) {
+			ctx.beginPath();
+			ctx.moveTo(mouse.x, mouse.y);
+	 
+			canvas.addEventListener('mousemove', onPaint, false);
+	}, false);
+	 
+	canvas.addEventListener('mouseup', function() {
+			canvas.removeEventListener('mousemove', onPaint, false);
+	}, false);
+	 
+	var onPaint = function() {
+			ctx.lineTo(mouse.x, mouse.y);
+			lineColor = document.getElementById('input').value;
+			if (lineColor){
+      ctx.strokeStyle=lineColor;
+      ctx.stroke();
+   }
+			ctx.stroke();
+	};
+
+	$('#reset').click(function(){
+		  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)}); // Clears the canvas
+	
+}());
+
+	</script>
+</body>
+</html>
