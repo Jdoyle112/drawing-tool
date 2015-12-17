@@ -24,10 +24,7 @@
 
 	var mouse = {x: 0, y: 0};
 
-	$('#input').change(function(){
-		 ctx.strokeStyle = lineColor;
-		 ctx.stroke();
-	});
+	
 	 
 	/* Mouse Capturing Work */
 	canvas.addEventListener('mousemove', function(e) {
@@ -56,9 +53,9 @@
 			ctx.lineTo(mouse.x, mouse.y);
 			lineColor = document.getElementById('input').value;
 			if (lineColor){
-      ctx.strokeStyle=lineColor;
-      ctx.stroke();
-   }
+			      ctx.strokeStyle=lineColor;
+			      ctx.stroke();
+			   }
 			ctx.stroke();
 	};
 
